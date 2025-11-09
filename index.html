@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synoprop - Property Management Reimagined</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #1F2937;
+            line-height: 1.6;
+            background: white;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 1.5rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .logo {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #4B5563;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #1F2937;
+        }
+
+        .btn-demo {
+            background: transparent;
+            color: #1F2937;
+            padding: 0.7rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 2px solid #1F2937;
+            transition: all 0.2s;
+        }
+
+        .btn-demo:hover {
+            background: #1F2937;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: white;
+            padding: 12rem 8% 8rem;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .hero-label {
+            font-size: 0.9rem;
+            color: #6B7280;
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+            color: #1F2937;
+            line-height: 1.05;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #6B7280;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            background: #1F2937;
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-block;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .hero-cta:hover {
+            background: #374151;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(31, 41, 55, 0.2);
+        }
+
+        /* Hero Image */
+        .hero-image {
+            margin-top: 5rem;
+            background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-image-placeholder {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9CA3AF;
+            font-size: 1.1rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 8rem 8%;
+            background: white;
+            text-align: center;
+        }
+
+        .stats h2 {
+            font-size: 2.5rem;
+            margin-bottom: 5rem;
+            color: #1F2937;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: left;
+            border-left: 3px solid #E5E7EB;
+            padding-left: 2rem;
+        }
+
+        .stat-number {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: #1F2937;
+            line-height: 1;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #1F2937;
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 0;
+            background: white;
+        }
+
+        .feature-block {
+            padding: 6rem 8%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .feature-block:nth-child(even) {
+            background: #FAFAFA;
+        }
+
+        .feature-block:nth-child(even) .feature-content {
+            order: 2;
+        }
+
+        .feature-block:nth-child(even) .feature-visual {
+            order: 1;
+        }
+
+        .feature-number {
+            font-size: 5rem;
+            font-weight: 700;
+            color: #E5E7EB;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .feature-content h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #1F2937;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .feature-content p {
+            font-size: 1.1rem;
+            color: #6B7280;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-visual {
+            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-visual-placeholder {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            width: 100%;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9CA3AF;
+        }
+
+        /* Login Section */
+        .login-section {
+            padding: 8rem 8%;
+            background: #FAFAFA;
+            text-align: center;
+        }
+
+        .login-section h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #1F2937;
+            font-weight: 600;
+        }
+
+        .login-section p {
+            font-size: 1.2rem;
+            color: #6B7280;
+            margin-bottom: 4rem;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .login-btn {
+            background: white;
+            color: #1F2937;
+            padding: 1.5rem 3rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.2s;
+            border: 1px solid #E5E7EB;
+            min-width: 200px;
+        }
+
+        .login-btn:hover {
+            border-color: #A89FE8;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 8rem 8%;
+            background: white;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 5rem;
+            color: #1F2937;
+            font-weight: 600;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: #FAFAFA;
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid #F3F4F6;
+        }
+
+        .testimonial-quote {
+            font-size: 1.15rem;
+            color: #1F2937;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-size: 0.95rem;
+            color: #6B7280;
+            font-weight: 600;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: #9CA3AF;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: #1F2937;
+            padding: 8rem 8%;
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+        }
+
+        .btn-cta-large {
+            background: white;
+            color: #1F2937;
+            padding: 1.3rem 3.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .btn-cta-large:hover {
+            background: #F9FAFB;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            border-top: 1px solid #E5E7EB;
+            color: #6B7280;
+            padding: 3rem 8%;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .feature-block {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .feature-block:nth-child(even) .feature-content,
+            .feature-block:nth-child(even) .feature-visual {
+                order: initial;
+            }
+
+            .stats-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .login-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <img src="/mnt/user-data/uploads/synoprop_logo_dark_horizontal.jpg" alt="Synoprop" class="logo">
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#demo" class="btn-demo">Book a demo</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-label">Property management system</div>
+        <h1>More control. More revenue.</h1>
+        <p>With Synoprop, automation replaces busywork, stakeholders get a more personalized experience, and you can boost efficiency effortlessly.</p>
+        <a href="#demo" class="hero-cta">Book a demo</a>
+        
+        <!-- Login Buttons in Hero -->
+        <div style="margin-top: 4rem;">
+            <div style="font-size: 0.9rem; color: #6B7280; margin-bottom: 1.5rem; letter-spacing: 0.5px;">Access Your Portal</div>
+            <div class="login-buttons">
+                <a href="login-manager.html" class="login-btn">Manager Login</a>
+                <a href="login-owner.html" class="login-btn">Owner Login</a>
+                <a href="login-tenant.html" class="login-btn">Tenant Login</a>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <div class="hero-image-placeholder">Dashboard Preview</div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <h2>Real customer results</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">40%</div>
+                <div class="stat-label">faster property management</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">35%</div>
+                <div class="stat-label">improved tenant satisfaction</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3x</div>
+                <div class="stat-label">higher reporting efficiency</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="feature-block">
+            <div class="feature-content">
+                <div class="feature-number">01</div>
+                <h3>Financial Management</h3>
+                <p>Comprehensive rent tracking, automated invoicing, expense management, and detailed financial reporting. Keep your finances organized and transparent with real-time insights.</p>
+            </div>
+            <div class="feature-visual">
+                <div class="feature-visual-placeholder">Financial Dashboard</div>
+            </div>
+        </div>
+
+        <div class="feature-block">
+            <div class="feature-content">
+                <div class="feature-number">02</div>
+                <h3>Maintenance Tracking</h3>
+                <p>Streamline maintenance requests, track work orders, manage vendors, and ensure timely resolutions. Complete maintenance history at your fingertips with automated workflows.</p>
+            </div>
+            <div class="feature-visual">
+                <div class="feature-visual-placeholder">Maintenance Interface</div>
+            </div>
+        </div>
+
+        <div class="feature-block">
+            <div class="feature-content">
+                <div class="feature-number">03</div>
+                <h3>Tenant Portal</h3>
+                <p>Empower tenants with self-service capabilities. Online rent payments, maintenance requests, document access, and direct communication channels all in one place.</p>
+            </div>
+            <div class="feature-visual">
+                <div class="feature-visual-placeholder">Tenant Portal</div>
+            </div>
+        </div>
+
+        <div class="feature-block">
+            <div class="feature-content">
+                <div class="feature-number">04</div>
+                <h3>Advanced Reporting</h3>
+                <p>Generate comprehensive reports on occupancy, revenue, expenses, and performance metrics. Data-driven insights for better decisions and strategic planning.</p>
+            </div>
+            <div class="feature-visual">
+                <div class="feature-visual-placeholder">Reports Dashboard</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2>Trusted by property professionals</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"The interface is so simple to use – it empowers our team to work faster and deliver better service."</div>
+                <div class="testimonial-author">Property Manager</div>
+                <div class="testimonial-role">City Heights Properties</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"Synoprop has transformed how we manage our portfolio. Everything is streamlined and efficient."</div>
+                <div class="testimonial-author">Portfolio Director</div>
+                <div class="testimonial-role">Urban Estates</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"The reporting features alone have saved us countless hours every month. Incredible platform."</div>
+                <div class="testimonial-author">Operations Manager</div>
+                <div class="testimonial-role">Prime Properties</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="demo">
+        <h2>Ready to transform your property management?</h2>
+        <p>Schedule a personalized demo and discover how Synoprop can streamline your operations</p>
+        <a href="#contact" class="btn-cta-large">Book a demo</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Synoprop. All rights reserved.</p>
+        <p>Property Management Reimagined</p>
+    </footer>
+</body>
+</html>
